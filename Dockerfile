@@ -50,14 +50,14 @@ USER renderer
 
 # Configure stylesheet
 WORKDIR /home/renderer/src
-RUN git clone https://github.com/gravitystorm/openstreetmap-carto.git
-WORKDIR /home/renderer/src/openstreetmap-carto
+RUN git clone https://github.com/mapbox/osm-bright
+WORKDIR /home/renderer/src/osm-bright
 USER root
 RUN apt-get install -y npm nodejs
 RUN npm install -g carto
 USER renderer
 RUN carto -v
-RUN carto project.mml > mapnik.xml
+RUN carto osm-bright.osm2pgsql.mml > mapnik.xml
 
 # Load shapefiles
 WORKDIR /home/renderer/src/openstreetmap-carto
